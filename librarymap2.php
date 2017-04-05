@@ -1,9 +1,9 @@
 <?php 
 
-// Show where a classmark ramge is on a floorplan
-// Tim Graves.  
-// 28/03/2017. Funtionally ought to be complete barring testing
-// 28/03/2017.  Formatting still needs attention
+// DEMONSTRATION OF HOW A MORE WIDELY FUNCTIONAL NAVIGATION PAGE MIGHT WORK.  TG. 01/04/2017
+
+// Basically librarymap.php with a few reformattings and a dummy study room drop down.
+
 
  // Put the locations into an array
  // Perhaps it would be good to adjust the co-ordinates to show approximately where a classmark starts within the block?
@@ -641,11 +641,20 @@ $locations = array(
 		<title>University maps</title>
 		<script src="http://www.sussex.ac.uk/assets/js/libs/jquery/jquery-1.7.1.min.js" type="text/javascript"></script>
 		<style type="text/css" media="all">
-		
+
+		/* experiment trying to get the image to resize responsively */
+		/* #floorplan {
+			height: auto; 
+			width: 100%; 
+			}
+		.responsive-image {
+		height: auto;
+		width: 60%;
+		} */
+
 		/* Library formatting */
 		h1,h2,h3,h4,h5,h6{font-weight:normal;color:#034c5b}.feature h1,.feature h2,.feature h3,.feature h4,.feature h5,.feature h6{color:inherit}h1{font-family:Georgia,serif;font-size:1.7em}#content h1{line-height:1.1em}h2{font-size:1.4em}h3{font-size:1.3em}h4{font-size:1.2em}h5{font-size:1.1em}body,a:hover,#breadcrumbs ul a,#nav li a{color:#244857}a{color:#11718f}#content,div.feature{color:#35535f}#topnav li a,#subnav li a{color:#fff}#breadcrumbs{font-size:.85em}a,#breadcrumbs a:hover{text-decoration:underline}a:hover,#topnav a,#subnav a,#nav a,#breadcrumbs a{text-decoration:none}#content{line-height:1.4em}body,#breadcrumbs,#footer{background-color:#e1e8eb;border-color:#9f9f9f}#page{background-image:url("images/in_page_bottom.png")}#header{background-image:url("images/in_page_top.png")}#topnav li{background:#095972 url("images/in_topnav.png") no-repeat scroll top left;border-bottom:1px solid #fff;border-radius:12px 12px 0 0}#topnav li a{background:transparent url("images/rounded_topright.png") no-repeat scroll top right}#topnav li:hover{background-color:#2b697c;background-image:url("images/in_topnav_hover.png")}#topnav li.active{background-image:url("images/in_topnav_active.png")}#subnav,#topnav li.active{background-color:#0ba0c8}#subnav,#subnav li.first a{border-top-left-radius:12px}#subnav li.first a{background:transparent url("images/rounded_topleft.png") no-repeat scroll top left}#subnav li.active a,#subnav li a:hover{background-color:#0db7df}#topnav li.active{border-bottom:1px solid #0ba0c8}#subnav li a{border-right:1px dotted #fff}#subnav li.last a{border-right:0}#nav li{border-bottom:1px dotted #b7b7b7}#nav li a:hover,#nav li.active a{background:transparent url("images/breadcrumb_arrow.gif") no-repeat scroll 8px center}#nav li li a:hover,#nav li li.active a{background-position:23px center}#topnav{float:right}#topnav li a{padding:10px 20px}#topnav li{margin-left:1px}#subnav li.clear{float:none;display:block}#subnav li a{padding:10px}#subnav li,#subnav,#subnav ul,#subnav a{padding:0}#nav li a{padding-left:20px}#nav li li a{padding-left:35px}#page_title{margin:6px 0 15px 0;padding-bottom:5px;border-bottom:2px solid #ddd}.swatch2,.swatch2fg,.swatch4,.swatch4fg,.swatch5,.swatch5fg,.swatch7,.swatch7fg{color:#35535f !important}.swatch1,.swatch1fg,.swatch3,.swatch3fg{color:#fff !important}.swatch1,.swatch1bg{background-color:#0ba0ca !important}.swatch2,.swatch2bg{background-color:#c2e6ef !important}.swatch3,.swatch3bg{background-color:#096347 !important}.swatch4,.swatch4bg{background-color:#9c9 !important}.swatch5,.swatch5bg{background-color:#0e7c9c !important}.swatch6,.swatch6bg{background-color:#d0eeee !important}.swatch7,.swatch7bg{background-color:#fff !important}
 		/* End of Library formatting */
-		
 		
 			#itsmap
 			{
@@ -979,48 +988,18 @@ $location = $location . $addToEnd;
 
 		  ?>
 
-<?php echo '<h1>' . $place["floor"] . '</h1>' ?>	 
-					
-		<div class="mainpanel">
-			<div id="itsmap" style="position:relative;">
-				<div class="map-locations">
-
-					<?php echo '<div class="map-location" style="top:' .  $place["xpos"] . 'px;left:' .  $place["ypos"] . 'px;">' ?>
-										
-					<!-- ?php echo '<div class="map-location-content"><b>' .  $place["title"] . ': ' .  $place["subject"] . '</b><br /> <br /><mark>' . $place["floor"]. ' - ' . $place["directions"] . '</mark>' ? -->
-					<?php echo '<div class="map-location-content"><b><mark>' . $display_classmark . '</mark><br /><br />' .  $place["title"] . ': ' .  $place["subject"] . '</b><br /> <br />' . $place["floor"]. ' - ' . $place["directions"] ?>
-
-					
-						</div>
-
-					</div> 
-
-				</div>
-
-
-				<?php
-				
-				// Making the image 60% seems to keep the detail and yet show on a standard screen
-				echo '<img src=' .  $place["map"] . ' alt="Library floorplan" width="60%"/>';
-
-				?>	
-				
-						
-		
-			</div>
-		</div>
-		<br />
-		
-		
 <!-- Navigate by classmark -->
 <!-- Excludes Core Collection, as this depends on sequence instead of location -->
 <!-- It makes the drop down misleading, and only applies until June 2017 anyway -->
 
+<h1>University of Sussex Library</h1>
+<h2>Finding your way around:</h2>
+
 <table>
 <tr>
-<th align='left'>Find a classmark</th>
+<th align='left'>By classmark</th>
 <td>
-	<form action="librarymap.php" id="classmarkform">
+	<form action="librarymap2.php" id="classmarkform">
 
 	<select name="location" form="classmarkform" onchange="this.form.submit()">
 
@@ -1035,19 +1014,18 @@ $location = $location . $addToEnd;
 	?>
 	</select>
 </td>
-</tr>
-
- <!-- input type="submit" -->
 
 </form>
+</tr>
 
 
 <!-- Navigate by subject -->
 
 <tr>
-<th align='left'>Find a subject</th>
+
+<th align='left'>By subject</th>
 <td>
-<form action="librarymap.php" id="subjectform">
+<form action="librarymap2.php" id="subjectform">
 
 <select name="location" form="subjectform" onchange="this.form.submit()">
 
@@ -1075,15 +1053,74 @@ array_multisort($subject, SORT_ASC, $locations);
 	?>
 
 </select>
+ </form>
+
 </td>
+</tr>
+
+<!-- place marker for study rooms.  Functionality yet to be developed -->
+<tr>
+
+<th>Study rooms</th>
+
+<form action="librarymap2.php" id="studyroomform">
+
+<td>
+<select name="roomlist" form="studyroomform">
+  <option value="volvo">0.1</option>
+  <option value="saab">0.2</option>
+  <option value="opel">0.3</option>
+  <option value="audi">etc</option>
+</select>
+
+</td>
+
+</form>
+
+<!-- End of place marker for study rooms -->
+
 </tr>
 </table>
 
- </form>
+
 
 <!-- end of drop down navigation -->
 
+					<?php echo '<h3>' . $place["floor"] . '</h3>' ?>	 
+		  
+		  
+		  
+		<div class="mainpanel">
+			<div id="itsmap" style="position:relative;">
+				<div class="map-locations">
+
+					<?php echo '<div class="map-location" style="top:' .  $place["xpos"] . 'px;left:' .  $place["ypos"] . 'px;">' ?>
+										
+					<!-- ?php echo '<div class="map-location-content"><b>' .  $place["title"] . ': ' .  $place["subject"] . '</b><br /> <br /><mark>' . $place["floor"]. ' - ' . $place["directions"] . '</mark>' ? -->
+					<?php echo '<div class="map-location-content"><b><mark>' . $display_classmark . '</mark><br /><br />' .  $place["title"] . ': ' .  $place["subject"] . '</b><br /> <br />' . $place["floor"]. ' - ' . $place["directions"] ?>
+
+					
+						</div>
+
+					</div> 
+
+				</div>
+
+
+				<?php
+				// Making the image 60% seems to keep the detail and yet show on a standard screen
+				
+				echo '<img src=' .  $place["map"] . ' alt="Library floorplan" width="60%"/>';
+	
+				?>	
+				
+
+			</div>
+		</div>
+		<br />
 		
+		
+	
 		
 		<script type="text/javascript">
 			//show/hide the flags
